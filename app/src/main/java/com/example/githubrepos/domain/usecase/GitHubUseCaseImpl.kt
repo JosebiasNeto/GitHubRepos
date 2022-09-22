@@ -9,11 +9,11 @@ class GitHubUseCaseImpl(
     private val gitHubDatabase: GitHubDao
 ) : GitHubUseCase {
 
-    override suspend fun getAllGitHubRepositories(owner: String): List<GitHubRepository> {
+    override suspend fun getAllGitHubRepositories(owner: String): ArrayList<GitHubRepository> {
         return gitHubApiService.getAllGitHubRepositories(owner)
     }
 
-    override suspend fun getFavoritiesGitHubRepositories(): List<GitHubRepository> {
+    override suspend fun getFavoritiesGitHubRepositories(): ArrayList<GitHubRepository> {
         return gitHubDatabase.getGitHubRepositories()
     }
 

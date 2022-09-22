@@ -12,7 +12,7 @@ interface GitHubDao {
     suspend fun insertGitHubRepository(gitHubRepository: GitHubRepository)
 
     @Query("SELECT * FROM githubrepositories")
-    suspend fun getGitHubRepositories(): List<GitHubRepository>
+    suspend fun getGitHubRepositories(): ArrayList<GitHubRepository>
 
     @Query("DELETE FROM githubrepositories WHERE id = :gitHubRepositoryId")
     suspend fun deleteFavoriteGitHubRepository(gitHubRepositoryId: Int)

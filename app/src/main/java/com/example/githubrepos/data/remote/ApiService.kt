@@ -7,5 +7,5 @@ import retrofit2.http.Path
 interface ApiService {
 
     @GET("{owner}/repos")
-    suspend fun getAllGitHubRepositories(@Path("owner") owner: String): List<GitHubRepository>
+    suspend fun getAllGitHubRepositories(@Path("owner") owner: String): ArrayList<GitHubRepository>
 }
