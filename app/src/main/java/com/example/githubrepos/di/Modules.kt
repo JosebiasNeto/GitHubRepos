@@ -6,7 +6,7 @@ import com.example.githubrepos.domain.usecase.GitHubUseCase
 import com.example.githubrepos.domain.usecase.GitHubUseCaseImpl
 import com.example.githubrepos.ui.favorite.FavoriteViewModel
 import com.example.githubrepos.ui.github.GitHubViewModel
-import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -14,10 +14,10 @@ object Modules {
     val data = module {
 
         factory<GitHubUseCase> {
-            GitHubUseCaseImpl(get(), get())
+            GitHubUseCaseImpl(
+                RetrofitBuilder.gitHubRepositoriesApi,
+                GitHubRoomDatabase.getGitHubRoomDatabase(androidApplication()).gitHubDao())
         }
-        factory { RetrofitBuilder.gitHubRepositoriesApi }
-        factory { GitHubRoomDatabase.getGitHubRoomDatabase(androidContext()).gitHubDao() }
 
         viewModel {
             GitHubViewModel(get())

@@ -1,7 +1,7 @@
 package com.example.githubrepos.ui.github
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubrepos.domain.model.GitHubRepository
@@ -12,21 +12,25 @@ class GitHubViewModel(
     private val useCase: GitHubUseCase
 ): ViewModel() {
 
-    private val _gitHubRepositories = MutableLiveData<ArrayList<GitHubRepository>>()
-    val gitHubRepositories: LiveData<ArrayList<GitHubRepository>> = _gitHubRepositories
-
-    private val _owner = MutableLiveData<String>()
-    val owner: LiveData<String> = _owner
+    val gitHubRepositories: MutableState<ArrayList<GitHubRepository>> = mutableStateOf(arrayListOf())
+    val owner: MutableState<String> = mutableStateOf("")
+    val getOwnerDialogIsVisible: MutableState<Boolean> = mutableStateOf(false)
 
     fun getAllRepositories(){
         viewModelScope.launch {
-            _owner.value?.let {
-                _gitHubRepositories.postValue(useCase.getAllGitHubRepositories(it))
-            }
+            gitHubRepositories.value.addAll(useCase.getAllGitHubRepositories(owner.value))
         }
     }
 
     fun setOwner(setOwner: String){
-        _owner.postValue(setOwner)
+        owner.value = setOwner
+    }
+
+    fun showGetOwnerDialog(){
+        getOwnerDialogIsVisible.value = true
+    }
+
+    fun dismissGetOwnerDialog(){
+        getOwnerDialogIsVisible.value = false
     }
 }

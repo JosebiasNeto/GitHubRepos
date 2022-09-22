@@ -1,5 +1,6 @@
 package com.example.githubrepos.domain.usecase
 
+import com.example.githubrepos.data.local.ConvertLocalDatabaseEntity
 import com.example.githubrepos.data.local.GitHubDao
 import com.example.githubrepos.data.remote.ApiService
 import com.example.githubrepos.domain.model.GitHubRepository
@@ -14,11 +15,18 @@ class GitHubUseCaseImpl(
     }
 
     override suspend fun getFavoritiesGitHubRepositories(): ArrayList<GitHubRepository> {
-        return gitHubDatabase.getGitHubRepositories()
+        val gitHubRepositories = arrayListOf<GitHubRepository>()
+        gitHubDatabase.getGitHubRepositories().forEach {
+            gitHubRepositories.add(
+                ConvertLocalDatabaseEntity().fromDatabase(it)
+            )
+        }
+        return gitHubRepositories
     }
 
     override suspend fun favoriteGitHubRepository(gitHubRepository: GitHubRepository) {
-        gitHubDatabase.insertGitHubRepository(gitHubRepository)
+        gitHubDatabase.insertGitHubRepository(
+            ConvertLocalDatabaseEntity().toDatabase(gitHubRepository))
     }
 
     override suspend fun deleteFavoriteGitHubRepository(gitHubRepositoryId: Int) {

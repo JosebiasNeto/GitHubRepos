@@ -1,9 +1,7 @@
 package com.example.githubrepos.domain.model
 
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "githubrepositories")
 data class GitHubRepository (
 
     @SerializedName("id")

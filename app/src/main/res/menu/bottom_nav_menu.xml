@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/github"
+        android:icon="@drawable/iconmonstr_github_1"
+        android:title="@string/github"/>
+    <item android:id="@+id/favorite"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="@string/favorite"/>
+</menu>
