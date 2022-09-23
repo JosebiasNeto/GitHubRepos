@@ -51,7 +51,9 @@ fun ShowGetOwnerDialog(
                     singleLine = true, )
                 Card(modifier = Modifier
                     .padding(top = 10.dp)
-                    .clickable { onSavePressed(newOwner) }
+                    .clickable {
+                        onSavePressed(newOwner)
+                    }
                     .border(1.dp, grey, RoundedCornerShape(30.dp))
                     .size(120.dp, 35.dp)
                     .align(Alignment.CenterHorizontally)

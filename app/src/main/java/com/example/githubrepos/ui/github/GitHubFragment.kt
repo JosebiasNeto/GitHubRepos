@@ -62,9 +62,6 @@ class GitHubFragment : Fragment() {
                     }
                 }
             }
-            if(viewModel.owner.value != ""){
-                viewModel.getAllRepositories()
-            }
             if(getOwnerDialogIsVisible){
                 ShowGetOwnerDialog(
                     onSavePressed = {viewModel.setOwner(it)},
