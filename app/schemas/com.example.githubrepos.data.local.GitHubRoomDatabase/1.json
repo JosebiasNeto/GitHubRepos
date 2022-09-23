@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3085c1ea33dc9b540b395d4deb8dad10",
+    "identityHash": "7b06c10fe02f62cb42dedf23118bddfc",
     "entities": [
       {
         "tableName": "githubrepositories",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `owner` TEXT NOT NULL, `stargazers` INTEGER NOT NULL, `language` TEXT NOT NULL, `link` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `owner` TEXT NOT NULL, `stargazers` INTEGER NOT NULL, `language` TEXT NOT NULL, `link` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -55,7 +55,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -64,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3085c1ea33dc9b540b395d4deb8dad10')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7b06c10fe02f62cb42dedf23118bddfc')"
     ]
   }
 }

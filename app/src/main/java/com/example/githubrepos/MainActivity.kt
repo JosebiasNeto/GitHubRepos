@@ -9,8 +9,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     lateinit var bottomNavigationView: BottomNavigationView
-    val gitHubFragment = GitHubFragment()
-    val favoriteFragment = FavoriteFragment()
+    var gitHubFragment = GitHubFragment()
+    var favoriteFragment = FavoriteFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

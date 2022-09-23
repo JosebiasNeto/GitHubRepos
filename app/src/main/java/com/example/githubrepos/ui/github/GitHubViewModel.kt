@@ -27,10 +27,8 @@ class GitHubViewModel(
     }
 
     fun setOwner(setOwner: String){
-        if(setOwner != owner.value){
-            getAllRepositories()
-        }
         owner.value = setOwner
+        getAllRepositories()
         dismissGetOwnerDialog()
     }
 

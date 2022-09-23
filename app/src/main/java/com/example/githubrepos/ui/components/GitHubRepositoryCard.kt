@@ -25,7 +25,7 @@ import com.example.githubrepos.ui.theme.*
 fun GitHubRepositoryCard(
     gitHubRepository: GitHubRepository,
     isFavorite: Boolean,
-    onButtonPressed: () -> Unit
+    onButtonPressed: (GitHubRepository) -> Unit
 ){
     if(gitHubRepository.description == null){
         gitHubRepository.description = ""
@@ -54,7 +54,7 @@ fun GitHubRepositoryCard(
             Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()){
-                GetCardButton(isFavorite, onButtonPressed)
+                GetCardButton(isFavorite, onButtonPressed, gitHubRepository)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(painterResource(id = R.drawable.ic_baseline_star_24),
                     contentDescription = null, tint = yellowDark)
@@ -93,7 +93,8 @@ fun preview(){
 }
 
 @Composable
-fun GetCardButton(isFavorite: Boolean, onButtonPressed: () -> Unit){
+fun GetCardButton(isFavorite: Boolean, onButtonPressed: (GitHubRepository) -> Unit,
+gitHubRepository: GitHubRepository){
     val backgroundCardColor: androidx.compose.ui.graphics.Color?
     val iconCardColor: androidx.compose.ui.graphics.Color?
     var textCard = ""
@@ -113,7 +114,7 @@ fun GetCardButton(isFavorite: Boolean, onButtonPressed: () -> Unit){
 
         Card(modifier = Modifier
             .padding(top = 10.dp)
-            .clickable { onButtonPressed() }
+            .clickable { onButtonPressed(gitHubRepository) }
             .border(1.dp, grey, RoundedCornerShape(5.dp))
             .size(120.dp, 50.dp), backgroundColor = backgroundCardColor
         ){

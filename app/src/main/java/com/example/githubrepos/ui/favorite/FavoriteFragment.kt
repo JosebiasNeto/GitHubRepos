@@ -31,18 +31,22 @@ class FavoriteFragment : Fragment() {
         setContent {
             viewModel.getFavoritesGitHubRepositories()
             repositoriesList = viewModel.favoritesRepositories
-            Box{
+            Box {
                 Column(
                     Modifier
                         .fillMaxSize()
-                        .background(defaultBackgroundWhite)) {
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
-                        Text("Favorites", fontSize = 25.sp, modifier = Modifier.padding(all = 25.dp),
-                            fontWeight = FontWeight.Bold)
+                        .background(defaultBackgroundWhite)
+                ) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Text(
+                            "Favorites", fontSize = 25.sp, modifier = Modifier.padding(all = 25.dp),
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                     LazyColumn {
-                        items(repositoriesList.size){ repo ->
-                            GitHubRepositoryCard(repositoriesList[repo], true
+                        items(repositoriesList.size) { repo ->
+                            GitHubRepositoryCard(
+                                repositoriesList[repo], true
                             ) {
                                 viewModel.deleteFavoriteGitHubRepository(repositoriesList[repo].id)
                             }

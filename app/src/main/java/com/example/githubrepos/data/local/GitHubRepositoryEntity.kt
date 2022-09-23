@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "githubrepositories")
 class GitHubRepositoryEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var id: Int,
     var name: String,
     var description: String,

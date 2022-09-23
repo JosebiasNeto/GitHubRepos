@@ -54,10 +54,10 @@ class GitHubFragment : Fragment() {
                     }
                     LazyColumn{
                         items(repositoriesList.size){ repo ->
-                            GitHubRepositoryCard(repositoriesList[repo], false
-                            ) {
-                                viewModel.favoriteGitHubRepository(repositoriesList[repo])
-                            }
+                            GitHubRepositoryCard(repositoriesList[repo], false,
+                            onButtonPressed = {
+                                viewModel.favoriteGitHubRepository(it)
+                            })
                         }
                     }
                 }
