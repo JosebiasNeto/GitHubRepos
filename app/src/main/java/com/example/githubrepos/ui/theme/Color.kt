@@ -9,3 +9,4 @@ val Teal200 = Color(0xFF03DAC5)
 
 val defaultBackgroundWhite = Color(0xFFEEEDED)
 val fullWhite = Color(0xFFFFFFFF)
+val grey = Color(0xFFD9D9D9)

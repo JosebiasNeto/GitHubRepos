@@ -18,12 +18,13 @@ class GitHubViewModel(
 
     fun getAllRepositories(){
         viewModelScope.launch {
-            gitHubRepositories.value.addAll(useCase.getAllGitHubRepositories(owner.value))
+            gitHubRepositories.value = useCase.getAllGitHubRepositories(owner.value)
         }
     }
 
     fun setOwner(setOwner: String){
         owner.value = setOwner
+        dismissGetOwnerDialog()
     }
 
     fun showGetOwnerDialog(){
@@ -32,5 +33,16 @@ class GitHubViewModel(
 
     fun dismissGetOwnerDialog(){
         getOwnerDialogIsVisible.value = false
+    }
+
+    fun favoriteGitHubRepository(gitHubRepository: GitHubRepository){
+        viewModelScope.launch {
+            useCase.favoriteGitHubRepository(gitHubRepository)
+            gitHubRepositories.value.forEach {
+                if(it.id == gitHubRepository.id){
+                    gitHubRepositories.value.remove(it)
+                }
+            }
+        }
     }
 }
