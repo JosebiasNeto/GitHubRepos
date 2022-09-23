@@ -27,7 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class GitHubFragment : Fragment() {
 
     private val viewModel: GitHubViewModel by viewModel()
-    private lateinit var repositoriesList: ArrayList<GitHubRepository>
+    private lateinit var repositoriesList: List<GitHubRepository>
     private var getOwnerDialogIsVisible = false
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class GitHubFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = ComposeView(inflater.context).apply {
         setContent {
-            repositoriesList = viewModel.gitHubRepositories.value
+            repositoriesList = viewModel.gitHubRepositories
             getOwnerDialogIsVisible = viewModel.getOwnerDialogIsVisible.value
 
             Box{

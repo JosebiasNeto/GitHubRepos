@@ -1,6 +1,5 @@
 package com.example.githubrepos.ui.components
 
-import android.graphics.Color
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -14,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
@@ -31,6 +29,9 @@ fun GitHubRepositoryCard(
 ){
     if(gitHubRepository.description == null){
         gitHubRepository.description = ""
+    }
+    if(gitHubRepository.language == null){
+        gitHubRepository.language = "Linguagem"
     }
     Card(modifier = Modifier.padding(all = 15.dp),
     elevation = 15.dp){
@@ -68,7 +69,7 @@ fun GitHubRepositoryCard(
                             .clip(CircleShape)
                             .size(5.dp))
                     Spacer(modifier = Modifier.width(5.dp))
-                    Text(gitHubRepository.language,
+                    Text(gitHubRepository.language!!,
                         color = grey)
                 }
             }
@@ -93,10 +94,10 @@ fun preview(){
 
 @Composable
 fun GetCardButton(isFavorite: Boolean, onButtonPressed: () -> Unit){
-    var backgroundCardColor: androidx.compose.ui.graphics.Color? = null
-    var iconCardColor: androidx.compose.ui.graphics.Color? = null
-    var textCard: String = ""
-    var iconCard: Int? = null
+    val backgroundCardColor: androidx.compose.ui.graphics.Color?
+    val iconCardColor: androidx.compose.ui.graphics.Color?
+    var textCard = ""
+    val iconCard: Int?
 
     if(isFavorite) {
         backgroundCardColor = redLight

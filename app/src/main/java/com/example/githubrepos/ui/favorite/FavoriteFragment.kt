@@ -8,16 +8,12 @@ import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.githubrepos.R
 import com.example.githubrepos.domain.model.GitHubRepository
 import com.example.githubrepos.ui.components.GitHubRepositoryCard
 import com.example.githubrepos.ui.theme.defaultBackgroundWhite
@@ -26,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FavoriteFragment : Fragment() {
 
     private val viewModel: FavoriteViewModel by viewModel()
-    private lateinit var repositoriesList: ArrayList<GitHubRepository>
+    private lateinit var repositoriesList: List<GitHubRepository>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +30,7 @@ class FavoriteFragment : Fragment() {
     ): View = ComposeView(inflater.context).apply {
         setContent {
             viewModel.getFavoritesGitHubRepositories()
-            repositoriesList = viewModel.favoritesRepositories.value
+            repositoriesList = viewModel.favoritesRepositories
             Box{
                 Column(
                     Modifier

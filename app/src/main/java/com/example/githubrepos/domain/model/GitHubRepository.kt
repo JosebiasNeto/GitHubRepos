@@ -15,7 +15,7 @@ data class GitHubRepository (
     @SerializedName("stargazers_count")
     var stargazers: Int,
     @SerializedName("language")
-    var language: String,
+    var language: String?,
     @SerializedName("html_url")
     var link: String,
 
