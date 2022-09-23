@@ -23,11 +23,14 @@ class FavoriteViewModel(
     fun deleteFavoriteGitHubRepository(gitHubRepositoryId: Int){
         viewModelScope.launch {
             useCase.deleteFavoriteGitHubRepository(gitHubRepositoryId)
+            var newList = arrayListOf<GitHubRepository>()
+            newList = favoritesRepositories.value
             favoritesRepositories.value.forEach {
                 if(it.id == gitHubRepositoryId){
-                    favoritesRepositories.value.remove(it)
+                    newList.remove(it)
             }
             }
+            favoritesRepositories.value = newList
         }
     }
 }

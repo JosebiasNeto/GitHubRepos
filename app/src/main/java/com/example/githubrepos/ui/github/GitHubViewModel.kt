@@ -38,14 +38,14 @@ class GitHubViewModel(
     fun favoriteGitHubRepository(gitHubRepository: GitHubRepository){
         viewModelScope.launch {
             useCase.favoriteGitHubRepository(gitHubRepository)
-            var newList = arrayListOf<GitHubRepository>()
-            newList = gitHubRepositories.value
-            gitHubRepositories.value.forEach {
-                if(it.id == gitHubRepository.id){
-                    newList.remove(it)
-                }
-            }
-            gitHubRepositories.value = newList
         }
+        var newList = arrayListOf<GitHubRepository>()
+        newList = gitHubRepositories.value
+        gitHubRepositories.value.forEach {
+            if(it.id == gitHubRepository.id){
+                newList.remove(it)
+            }
+        }
+        gitHubRepositories.value = newList
     }
 }
