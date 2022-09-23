@@ -1,7 +1,7 @@
 package com.example.githubrepos.ui.favorite
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubrepos.domain.model.GitHubRepository
@@ -11,21 +11,21 @@ import kotlinx.coroutines.launch
 class FavoriteViewModel(
     private val useCase: GitHubUseCase
 ): ViewModel() {
-    private val _favoritesRepositories = MutableLiveData<ArrayList<GitHubRepository>>()
-    val favoritesRepositories: LiveData<ArrayList<GitHubRepository>> = _favoritesRepositories
+
+    val favoritesRepositories: MutableState<ArrayList<GitHubRepository>> = mutableStateOf(arrayListOf())
 
     fun getFavoritesGitHubRepositories(){
         viewModelScope.launch {
-            _favoritesRepositories.postValue(useCase.getFavoritiesGitHubRepositories())
+            favoritesRepositories.value = useCase.getFavoritiesGitHubRepositories()
         }
     }
 
     fun deleteFavoriteGitHubRepository(gitHubRepositoryId: Int){
         viewModelScope.launch {
             useCase.deleteFavoriteGitHubRepository(gitHubRepositoryId)
-            _favoritesRepositories.value?.forEach {
+            favoritesRepositories.value.forEach {
                 if(it.id == gitHubRepositoryId){
-                    _favoritesRepositories.value!!.remove(it)
+                    favoritesRepositories.value.remove(it)
             }
             }
         }

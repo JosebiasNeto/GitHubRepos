@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -17,6 +14,9 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.githubrepos.R
 import com.example.githubrepos.domain.model.GitHubRepository
 import com.example.githubrepos.ui.components.GitHubRepositoryCard
@@ -43,16 +43,21 @@ class GitHubFragment : Fragment() {
                     Modifier
                         .fillMaxSize()
                         .background(defaultBackgroundWhite)) {
-                    Row(){
-                        Text("WeFit")
-                        IconButton(onClick = { viewModel.showGetOwnerDialog() }) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+                        Text("WeFit", fontSize = 25.sp, modifier = Modifier.padding(all = 25.dp),
+                        fontWeight = FontWeight.Bold)
+                        IconButton(onClick = { viewModel.showGetOwnerDialog() },
+                            modifier = Modifier.padding(all = 20.dp)) {
                             Icon(painter = painterResource(id = R.drawable.ic_baseline_settings_24),
-                            contentDescription = null)
+                            contentDescription = null, modifier = Modifier.size(30.dp))
                         }
                     }
                     LazyColumn{
                         items(repositoriesList.size){ repo ->
-                            GitHubRepositoryCard(repositoriesList[repo], false)
+                            GitHubRepositoryCard(repositoriesList[repo], false
+                            ) {
+                                viewModel.favoriteGitHubRepository(repositoriesList[repo])
+                            }
                         }
                     }
                 }
